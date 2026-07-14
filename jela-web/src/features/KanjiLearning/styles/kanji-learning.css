@@ -1,0 +1,1277 @@
+/* ============================================================
+   Kanji Learning — styles riêng, không ảnh hưởng global CSS.
+   Tái sử dụng CSS variables từ :root (index.css) và một số
+   class tiện ích từ dictionary.css (.sr-only, .dictionary-spinner).
+   ============================================================ */
+
+.kanji-page {
+  --kanji-border: #e5e7eb;
+  --kanji-shadow: 0 4px 20px rgba(0, 35, 111, 0.06);
+  --kanji-radius: 16px;
+  display: grid;
+  gap: 24px;
+  color: var(--color-on-surface);
+}
+
+/* ── Page header ─────────────────────────────────────────── */
+.kanji-page__header {
+  padding: 4px 2px 0;
+}
+
+.kanji-page__eyebrow {
+  color: var(--color-secondary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.kanji-page__header h1 {
+  margin: 0 0 8px;
+  color: var(--color-primary);
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.2;
+}
+
+.kanji-page__header > span {
+  color: var(--color-on-surface-variant);
+  font-size: 14px;
+}
+
+/* ── Search area ─────────────────────────────────────────── */
+.kanji-search-area {
+  position: relative;
+  z-index: 20;
+}
+
+.kanji-search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.kanji-search-field {
+  position: relative;
+  min-width: 0;
+}
+
+.kanji-search-box {
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 0 20px;
+  border: 1px solid var(--kanji-border);
+  border-radius: var(--kanji-radius);
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-container-lowest);
+  box-shadow: var(--kanji-shadow);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.kanji-search-box:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(64, 89, 170, 0.12), 0 8px 28px rgba(0, 35, 111, 0.08);
+}
+
+.kanji-search-box input {
+  min-width: 0;
+  padding: 20px 0;
+  border: 0;
+  outline: 0;
+  color: var(--color-on-surface);
+  background: transparent;
+  font-size: 15px;
+}
+
+.kanji-search-box input::placeholder {
+  color: #9ca3af;
+}
+
+/* Handwriting button — mirrors .handwriting-open-button từ Dictionary */
+.kanji-handwriting-btn {
+  min-width: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--kanji-radius);
+  color: #fff;
+  background: var(--color-primary);
+  box-shadow: 0 3px 0 #00164e, var(--kanji-shadow);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+  white-space: nowrap;
+}
+
+.kanji-handwriting-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.kanji-handwriting-btn:active {
+  box-shadow: var(--kanji-shadow);
+  transform: translateY(2px);
+}
+
+/* ── Search dropdown ─────────────────────────────────────── */
+.kanji-search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid var(--kanji-border);
+  border-radius: var(--kanji-radius);
+  background: var(--color-surface-container-lowest);
+  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.14);
+  z-index: 30;
+}
+
+.kanji-search-dropdown__loading,
+.kanji-search-dropdown__empty {
+  padding: 18px;
+  text-align: center;
+  color: var(--color-on-surface-variant);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.kanji-search-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--color-on-surface);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.kanji-search-item:hover {
+  color: var(--color-primary);
+  background: rgba(220, 225, 255, 0.48);
+  border-color: rgba(64, 89, 170, 0.14);
+  transform: translateX(2px);
+}
+
+.kanji-search-item__char {
+  font-family: var(--font-japanese);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  line-height: 1.1;
+}
+
+.kanji-search-item__info strong {
+  display: block;
+  font-size: 14px;
+  color: var(--color-on-surface);
+}
+
+.kanji-search-item__info small {
+  display: block;
+  font-size: 11px;
+  color: var(--color-on-surface-variant);
+  margin-top: 1px;
+}
+
+.kanji-search-item__romaji {
+  font-size: 11px;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+/* ── Main workspace grid ─────────────────────────────────── */
+.kanji-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 32px;
+  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ── Level section (Lộ trình Kanji) ─────────────────────── */
+.kanji-level-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kanji-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.kanji-level-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.kanji-level-card {
+  padding: 14px 12px;
+  border: 1px solid var(--kanji-border);
+  border-radius: var(--kanji-radius);
+  background: var(--color-surface-container-lowest);
+  box-shadow: var(--kanji-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  text-align: left;
+}
+
+.kanji-level-card:not(.kanji-level-card--locked):hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 24px rgba(0, 35, 111, 0.12);
+  transform: translateY(-2px);
+}
+
+.kanji-level-card--active {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(164, 48, 115, 0.15), var(--kanji-shadow);
+}
+
+.kanji-level-card--locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.kanji-level-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.kanji-level-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.kanji-level-badge--locked {
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface-variant);
+}
+
+.kanji-level-card__count {
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+  white-space: nowrap;
+}
+
+.kanji-level-card h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.kanji-level-progress-bg {
+  height: 5px;
+  background: var(--color-surface-container-high);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.kanji-level-progress-fill {
+  height: 100%;
+  background: var(--color-secondary);
+  border-radius: 99px;
+  transition: width 600ms ease;
+}
+
+.kanji-level-percent {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  text-align: right;
+}
+
+.kanji-level-card__btn {
+  min-height: 32px;
+  width: 100%;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-on-surface);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+}
+
+.kanji-level-card__btn:hover:not(:disabled) {
+  background: var(--color-surface-container-low);
+}
+
+.kanji-level-card__btn--primary {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: #fff;
+  box-shadow: 0 2px 0 #7a1a54;
+}
+
+.kanji-level-card__btn--primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+  background: var(--color-secondary);
+}
+
+.kanji-level-card__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Kanji list table ────────────────────────────────────── */
+.kanji-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kanji-list-section__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kanji-list-table-wrapper {
+  border: 1px solid var(--kanji-border);
+  border-radius: var(--kanji-radius);
+  background: var(--color-surface-container-lowest);
+  box-shadow: var(--kanji-shadow);
+  overflow: hidden;
+}
+
+.kanji-list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.kanji-list-table th,
+.kanji-list-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--kanji-border);
+}
+
+.kanji-list-table th {
+  background: var(--color-surface-container-low);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.kanji-list-table tbody tr {
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.kanji-list-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.kanji-list-table tbody tr:hover {
+  background: rgba(220, 225, 255, 0.35);
+}
+
+.kanji-list-table tbody tr.kanji-list-table__row--selected {
+  background: rgba(164, 48, 115, 0.07);
+}
+
+.kanji-list-table__char {
+  font-family: var(--font-japanese);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.kanji-list-table__meaning {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.kanji-list-table__romaji {
+  color: var(--color-on-surface-variant);
+  font-size: 14px;
+}
+
+.kanji-list-table__action-btn {
+  padding: 5px 12px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+  white-space: nowrap;
+}
+
+.kanji-list-table__action-btn:hover {
+  background: rgba(220, 225, 255, 0.55);
+  border-color: var(--color-primary);
+}
+
+/* ── Pagination — styles ở Pagination.css (shared component) ── */
+
+/* ── History list (Dictionary-like style) ────────────────── */
+.kanji-history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kanji-history-message {
+  padding: 14px;
+  border-radius: 12px;
+  margin: 0;
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-container-low);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.kanji-history-list {
+  display: grid;
+  gap: 8px;
+}
+
+.kanji-history-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--color-on-surface);
+  background: var(--color-surface-container-lowest, #fff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  transition: color 150ms ease, background 150ms ease,
+    border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.kanji-history-list__item:hover {
+  color: var(--color-primary);
+  background: rgba(220, 225, 255, .48);
+  border-color: rgba(64, 89, 170, .14);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(64, 89, 170, 0.08);
+}
+
+.kanji-history-list__item--selected {
+  background: rgba(220, 225, 255, 0.6) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(64, 89, 170, 0.12);
+}
+
+.kanji-history-list__char {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.kanji-history-list__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 2px;
+}
+
+.kanji-history-list__romaji {
+  display: block;
+  font-size: 13px;
+  color: var(--color-on-surface);
+}
+
+.kanji-history-list__time {
+  display: block;
+  color: var(--color-on-surface-variant);
+  font-size: 11px;
+}
+
+.kanji-history-list__item--skeleton {
+  cursor: default;
+  pointer-events: none;
+  background: var(--color-surface-container-lowest);
+  border-color: var(--color-outline-variant);
+}
+
+/* ── Detail Modal ────────────────────────────────────────── */
+.kanji-detail-modal {
+  position: relative;
+  width: min(100%, 780px);
+  max-height: calc(100vh - 48px);
+  border: 1px solid var(--kanji-border);
+  border-radius: 22px;
+  background: var(--color-surface-container-lowest);
+  box-shadow: var(--kanji-shadow);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanji-detail-panel__content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .kanji-detail-modal {
+    overflow-y: hidden;
+    height: 600px;
+  }
+  .kanji-detail-panel__content-wrapper {
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+.kanji-detail-panel__left {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(220, 225, 255, 0.45) 0%, rgba(255, 255, 255, 0) 180px);
+}
+
+@media (min-width: 768px) {
+  .kanji-detail-panel__left {
+    border-right: 1px solid var(--kanji-border);
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+.kanji-detail-panel__right {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+@media (min-width: 768px) {
+  .kanji-detail-panel__right {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+.kanji-detail-panel__empty {
+  min-height: 440px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.kanji-detail-panel__empty > span {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: var(--color-primary);
+  background: var(--color-surface-container-low);
+  font-family: var(--font-japanese);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.kanji-detail-panel__empty h3 {
+  margin: 14px 0 6px;
+  color: var(--color-primary);
+  font-size: 16px;
+}
+
+.kanji-detail-panel__empty p {
+  color: var(--color-on-surface-variant);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.kanji-detail-panel__header {
+  padding: 32px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.kanji-detail-panel__level-badge {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.kanji-detail-panel__char {
+  font-family: var(--font-japanese);
+  font-size: clamp(54px, 8vw, 80px);
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+
+.kanji-detail-panel__meaning {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin-top: 4px;
+}
+
+.kanji-meaning-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.kanji-meaning-tag {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--kanji-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.kanji-detail-panel__body {
+  padding: 0 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.kanji-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.kanji-info-box {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--color-surface-container-low);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kanji-info-box__label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+  letter-spacing: 0.08em;
+}
+
+.kanji-info-box__value {
+  font-family: var(--font-japanese);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.kanji-info-box__value--plain {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.kanji-info-box--full {
+  grid-column: span 2;
+}
+
+.kanji-reading-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.kanji-reading-line {
+  font-family: var(--font-japanese);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.25;
+  display: block;
+}
+
+/* ── Vocabulary list ─────────────────────────────────────── */
+.kanji-vocab-section {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kanji-vocab-section__heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-top: 16px;
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.kanji-vocab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kanji-vocab-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--kanji-border);
+  border-radius: 10px;
+  transition: border-color 150ms, background 150ms;
+}
+
+.kanji-vocab-item:hover {
+  border-color: rgba(64, 89, 170, 0.3);
+  background: rgba(220, 225, 255, 0.25);
+}
+
+.kanji-vocab-item__word {
+  font-family: var(--font-japanese);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: block;
+}
+
+.kanji-vocab-item__reading {
+  font-size: 11px;
+  color: var(--color-secondary);
+  font-weight: 600;
+  display: block;
+  margin-top: 1px;
+}
+
+.kanji-vocab-item__meaning {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-on-surface);
+  text-align: right;
+}
+
+/* ── Add to list button ──────────────────────────────────── */
+.kanji-add-btn {
+  margin: auto 24px 24px;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-secondary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #7a1a54;
+  transition: filter 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.kanji-add-btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.kanji-add-btn:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+/* ── AddToLearningListModal ──────────────────────────────── */
+.kanji-modal-backdrop {
+  --kanji-border: #e5e7eb;
+  --kanji-shadow: 0 4px 20px rgba(0, 35, 111, 0.06);
+  --kanji-radius: 16px;
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(17, 24, 39, 0.48);
+  backdrop-filter: blur(3px);
+}
+
+.kanji-modal {
+  position: relative;
+  width: min(100%, 460px);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 28px;
+  border: 1px solid var(--kanji-border);
+  border-radius: 22px;
+  color: var(--color-on-surface);
+  background: var(--color-surface-container-lowest);
+  box-shadow: 0 24px 70px rgba(17, 24, 39, 0.24);
+}
+
+.kanji-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 7px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--color-on-surface-variant);
+  background: transparent;
+  cursor: pointer;
+  transition: color 150ms, background 150ms;
+}
+
+.kanji-modal__close:hover {
+  color: var(--color-primary);
+  background: var(--color-surface-container-low);
+}
+
+.kanji-modal__kanji-preview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 10px;
+  background: var(--color-surface-container-low);
+}
+
+.kanji-modal__kanji-preview strong {
+  font-family: var(--font-japanese);
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+.kanji-modal__kanji-preview span {
+  font-size: 14px;
+  color: var(--color-on-surface-variant);
+}
+
+.kanji-modal__lists {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.kanji-modal__lists button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--color-on-surface);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: color 150ms, background 150ms, border-color 150ms;
+}
+
+.kanji-modal__lists button:hover {
+  color: var(--color-primary);
+  background: rgba(220, 225, 255, 0.48);
+  border-color: rgba(64, 89, 170, 0.14);
+}
+
+.kanji-modal__lists button small {
+  color: var(--color-on-surface-variant);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.kanji-modal__loading,
+.kanji-modal__empty {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: var(--color-on-surface-variant);
+  font-size: 13px;
+}
+
+.kanji-modal__auth-notice {
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(255, 216, 231, 0.42);
+  border: 1px solid rgba(164, 48, 115, 0.22);
+  color: var(--color-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.kanji-modal__create-toggle {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 14px;
+  border: 1px dashed var(--color-secondary);
+  border-radius: 9px;
+  color: var(--color-secondary);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+}
+
+.kanji-modal__create-toggle:hover:not(:disabled) {
+  background: rgba(255, 216, 231, 0.42);
+}
+
+.kanji-modal__create-form {
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--color-surface-container-high);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kanji-modal__create-form label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--color-on-surface);
+}
+
+.kanji-modal__create-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 9px;
+  outline: 0;
+  color: var(--color-on-surface);
+  background: var(--color-surface-container-low);
+  font-size: 14px;
+}
+
+.kanji-modal__create-form input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(64, 89, 170, 0.12);
+}
+
+.kanji-modal__create-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.kanji-modal__create-actions button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: filter 150ms, background 150ms;
+}
+
+.kanji-modal__create-actions .btn-cancel {
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+}
+
+.kanji-modal__create-actions .btn-cancel:hover {
+  background: var(--color-surface-container);
+}
+
+.kanji-modal__create-actions .btn-create {
+  background: var(--color-secondary);
+  color: #fff;
+}
+
+.kanji-modal__create-actions .btn-create:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.kanji-modal__create-actions button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+/* ── Skeleton / Loading ──────────────────────────────────── */
+.kanji-skeleton {
+  border-radius: 8px;
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-container-low) 25%,
+    var(--color-surface-container-high) 50%,
+    var(--color-surface-container-low) 75%
+  );
+  background-size: 200% 100%;
+  animation: kanji-skeleton-shine 1.2s ease-in-out infinite;
+}
+
+@keyframes kanji-skeleton-shine {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── Empty / Error states ────────────────────────────────── */
+.kanji-state-box {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px;
+  border: 1px solid var(--kanji-border);
+  border-radius: var(--kanji-radius);
+  background: var(--color-surface-container-lowest);
+  text-align: center;
+  color: var(--color-on-surface-variant);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.kanji-state-box strong {
+  color: var(--color-primary);
+  font-size: 15px;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .kanji-workspace {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 20px;
+  }
+
+  .kanji-level-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .kanji-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .kanji-page { gap: 18px; }
+
+  .kanji-level-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kanji-handwriting-btn span {
+    display: none;
+  }
+
+  .kanji-search-row {
+    grid-template-columns: minmax(0, 1fr) 52px;
+    gap: 8px;
+  }
+
+  .kanji-handwriting-btn {
+    min-width: 52px;
+    padding: 0;
+    border-radius: var(--kanji-radius);
+  }
+
+  .kanji-list-table th:nth-child(3),
+  .kanji-list-table td:nth-child(3) {
+    display: none;
+  }
+
+  .kanji-modal-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .kanji-modal {
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    max-height: 90dvh;
+  }
+}
+
+[data-theme='dark'] .kanji-page,
+[data-theme='dark'] .kanji-modal-backdrop {
+  --kanji-border: var(--color-outline-variant);
+  --kanji-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .kanji-search-box input::placeholder {
+  color: var(--color-on-surface-variant);
+}
+
+[data-theme='dark'] .kanji-detail-panel__header {
+  background: linear-gradient(135deg, rgba(38, 65, 145, 0.35), var(--color-surface-container-lowest) 65%);
+}
+
+/* ── Level Card — Start button variant ─────────────────────── */
+.kanji-level-card__btn--start {
+  background: transparent;
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary);
+  transition: background 0.18s, color 0.18s;
+}
+.kanji-level-card__btn--start:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ── Confirm Start Level Modal ──────────────────────────────── */
+.kanji-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: kanji-fade-in 0.18s ease;
+}
+
+.kanji-confirm-modal {
+  background: var(--color-surface);
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--color-outline-variant);
+}
+
+.kanji-confirm-modal__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+.kanji-confirm-modal__message {
+  font-size: 0.9rem;
+  color: var(--color-on-surface-variant);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.kanji-confirm-modal__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.kanji-confirm-modal__cancel {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1.5px solid var(--color-outline-variant);
+  background: transparent;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.kanji-confirm-modal__cancel:hover:not(:disabled) {
+  background: var(--color-surface-container);
+  border-color: var(--color-outline);
+}
+
+.kanji-confirm-modal__confirm {
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.kanji-confirm-modal__confirm:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.kanji-confirm-modal__confirm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+[data-theme='dark'] .kanji-confirm-modal {
+  background: var(--color-surface-container-low);
+  border-color: var(--color-outline);
+}

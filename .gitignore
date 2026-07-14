@@ -1,0 +1,14 @@
+.idea/
+*.iml
+
+target/
+*.class
+
+node_modules/
+dist/
+
+*.log
+.env
+
+.DS_Store
+Thumbs.db

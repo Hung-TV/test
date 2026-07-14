@@ -1,0 +1,776 @@
+.settings-page {
+  width: min(100%, 860px);
+  margin: 0 auto;
+  color: var(--color-on-surface);
+}
+
+.settings-page__header {
+  margin-bottom: 24px;
+}
+
+.settings-page__header p {
+  color: var(--color-secondary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.settings-page__header h1 {
+  margin: 5px 0 0;
+  color: var(--color-primary);
+  font-size: 28px;
+}
+
+.settings-card {
+  overflow: hidden;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 18px;
+  background: var(--color-surface-container-lowest);
+  box-shadow: 0 14px 36px rgba(26, 27, 33, .04);
+}
+
+.settings-section {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--color-surface-container-high);
+}
+
+.settings-section h2 {
+  margin: 0 0 22px;
+  color: var(--color-primary);
+  font-size: 18px;
+}
+
+.settings-section__heading,
+.settings-section__title,
+.settings-row,
+.settings-label-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.settings-section__heading {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.settings-section__heading h2 {
+  margin-bottom: 20px;
+}
+
+.settings-section__title {
+  gap: 9px;
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+
+.settings-section__title h2 {
+  margin: 0;
+}
+
+.settings-section__title svg {
+  width: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.verification-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.verification-badge--verified {
+  color: #087a46;
+  background: #e3f9ec;
+}
+
+.verification-badge--unverified {
+  color: #9a5a00;
+  background: #fff2d8;
+}
+
+.verification-badge--loading {
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-container-high);
+}
+
+.settings-account__content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 20px;
+}
+
+.settings-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--color-on-surface-variant);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.settings-account__email {
+  display: block;
+  color: var(--color-primary);
+  font-size: 15px;
+}
+
+.settings-account__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--color-on-surface-variant);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.settings-account__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.settings-email-button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--color-secondary-container);
+  border-radius: 8px;
+  color: var(--color-secondary);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.settings-email-button--primary {
+  border-color: var(--color-secondary);
+  color: #fff;
+  background: var(--color-secondary);
+}
+
+.settings-email-button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.settings-help,
+.settings-row p {
+  margin-top: 6px;
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.settings-icon-button {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 10px;
+  color: var(--color-primary);
+  background: var(--color-surface-container-low);
+  cursor: pointer;
+}
+
+.settings-icon-button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.settings-icon-button svg {
+  width: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.settings-row {
+  min-height: 58px;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.settings-row + .settings-row {
+  margin-top: 8px;
+}
+
+.settings-row strong {
+  color: var(--color-on-surface);
+  font-size: 13px;
+}
+
+.settings-row--compact {
+  min-height: 48px;
+}
+
+.settings-label-with-icon {
+  gap: 12px;
+}
+
+.settings-label-with-icon > span {
+  width: 22px;
+  color: var(--color-on-surface-variant);
+  font-size: 18px;
+  text-align: center;
+}
+
+.settings-outline-button {
+  flex: 0 0 auto;
+  padding: 9px 16px;
+  border: 1px solid var(--color-secondary-container);
+  border-radius: 8px;
+  color: var(--color-secondary);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.settings-outline-button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.password-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(17, 24, 39, .48);
+  backdrop-filter: blur(3px);
+  animation: password-backdrop-enter 160ms ease-out;
+}
+
+.email-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 125;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(17, 24, 39, .48);
+  backdrop-filter: blur(3px);
+}
+
+.email-modal {
+  position: relative;
+  width: min(100%, 480px);
+  padding: 32px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 18px;
+  color: var(--color-on-surface);
+  background: var(--color-surface-container-lowest);
+  box-shadow: 0 24px 70px rgba(17, 24, 39, .24);
+  animation: password-modal-enter 180ms ease-out;
+}
+
+.email-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--color-on-surface-variant);
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.email-modal__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  border-radius: 13px;
+  color: var(--color-primary);
+  background: var(--color-surface-container-low);
+}
+
+.email-modal__icon svg {
+  width: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.email-modal h2 {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 22px;
+}
+
+.email-modal > p {
+  margin-top: 8px;
+  color: var(--color-on-surface-variant);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.email-modal__address {
+  display: block;
+  padding: 13px 14px;
+  margin-top: 20px;
+  border-radius: 9px;
+  color: var(--color-primary);
+  background: var(--color-surface-container-low);
+  font-size: 14px;
+}
+
+.email-modal__field {
+  margin-top: 22px;
+}
+
+.email-modal__field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.email-modal__field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 9px;
+  outline: 0;
+  color: var(--color-on-surface);
+  background: var(--color-surface-container-low);
+}
+
+.email-modal__field input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(64, 89, 170, .14);
+}
+
+.email-modal__field > span {
+  display: block;
+  margin-top: 6px;
+  color: #ba1a1a;
+  font-size: 11px;
+}
+
+.email-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 22px;
+  margin-top: 24px;
+  border-top: 1px solid var(--color-surface-container-high);
+}
+
+.email-modal__actions button {
+  min-height: 42px;
+  padding: 0 17px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--color-on-surface);
+  background: transparent;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.email-modal__actions button[type='submit'] {
+  color: #fff;
+  background: var(--color-secondary);
+}
+
+.email-modal__actions button:disabled,
+.email-modal__close:disabled {
+  opacity: .58;
+  cursor: wait;
+}
+
+.password-modal {
+  position: relative;
+  width: min(100%, 560px);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 32px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 18px;
+  color: var(--color-on-surface);
+  background: var(--color-surface-container-lowest);
+  box-shadow: 0 24px 70px rgba(17, 24, 39, .24);
+  animation: password-modal-enter 180ms ease-out;
+}
+
+.password-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 9px;
+  color: var(--color-on-surface-variant);
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.password-modal__close:hover {
+  color: var(--color-primary);
+  background: var(--color-surface-container-low);
+}
+
+.password-modal__header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding-right: 28px;
+  margin-bottom: 26px;
+}
+
+.password-modal__icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--color-primary);
+  background: var(--color-primary-fixed, #dce1ff);
+}
+
+.password-modal__icon svg {
+  width: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.password-modal__header h2 {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 22px;
+}
+
+.password-modal__header p {
+  margin-top: 7px;
+  color: var(--color-on-surface-variant);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.password-field + .password-field,
+.password-requirements + .password-field {
+  margin-top: 18px;
+}
+
+.password-field > label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--color-on-surface);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.password-field__control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 48px;
+  overflow: hidden;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 10px;
+  background: var(--color-surface-container-low);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.password-field__control:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(64, 89, 170, .14);
+}
+
+.password-field__control--error {
+  border-color: #ba1a1a;
+}
+
+.password-field__control input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 0;
+  outline: 0;
+  color: var(--color-on-surface);
+  background: transparent;
+}
+
+.password-field__control input::placeholder {
+  color: var(--color-on-surface-variant);
+  opacity: .58;
+}
+
+.password-field__control button {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: var(--color-on-surface-variant);
+  background: transparent;
+  cursor: pointer;
+}
+
+.password-field__error {
+  display: block;
+  margin-top: 6px;
+  color: #ba1a1a;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.password-requirements {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--color-surface-container-low);
+}
+
+.password-requirements > strong {
+  color: var(--color-on-surface);
+  font-size: 11px;
+}
+
+.password-requirements ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 16px;
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;
+}
+
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-on-surface-variant);
+  font-size: 11px;
+}
+
+.password-requirements li > span {
+  width: 14px;
+  flex: 0 0 auto;
+  font-weight: 800;
+}
+
+.password-requirement--met {
+  color: #087a46 !important;
+}
+
+.password-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 22px;
+  margin-top: 24px;
+  border-top: 1px solid var(--color-surface-container-high);
+}
+
+.password-modal__cancel,
+.password-modal__submit {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 9px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.password-modal__cancel {
+  border: 0;
+  color: var(--color-on-surface);
+  background: transparent;
+}
+
+.password-modal__submit {
+  border: 0;
+  border-bottom: 4px solid #85145a;
+  color: #fff;
+  background: var(--color-secondary-container);
+}
+
+.password-modal__cancel:disabled,
+.password-modal__submit:disabled,
+.password-modal__close:disabled {
+  opacity: .58;
+  cursor: wait;
+}
+
+@keyframes password-backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes password-modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.setting-switch {
+  width: 42px;
+  height: 24px;
+  flex: 0 0 auto;
+  padding: 3px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-surface-container-highest);
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.setting-switch span {
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(26, 27, 33, .25);
+  transition: transform 160ms ease;
+}
+
+.setting-switch--checked {
+  background: var(--color-secondary-container);
+}
+
+.setting-switch--checked span {
+  transform: translateX(18px);
+}
+
+.settings-language {
+  min-width: 132px;
+  padding: 9px 34px 9px 12px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 9px;
+  color: var(--color-on-surface);
+  background: var(--color-surface-container-low);
+  cursor: pointer;
+}
+
+.settings-card__footer {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.settings-signout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 0;
+  color: #ba1a1a;
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+[data-theme='dark'] .setting-switch span {
+  background: #f1f0f7;
+}
+
+@media (max-width: 640px) {
+  .settings-page__header h1 {
+    font-size: 24px;
+  }
+
+  .settings-section {
+    padding: 24px 20px;
+  }
+
+  .settings-section__heading {
+    align-items: flex-start;
+  }
+
+  .settings-row {
+    align-items: flex-start;
+  }
+
+  .settings-row:not(.settings-row--compact) {
+    flex-direction: column;
+  }
+
+  .settings-outline-button {
+    width: 100%;
+  }
+
+  .settings-account__content {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-account__actions {
+    display: grid;
+    justify-content: stretch;
+  }
+
+  .email-modal-backdrop {
+    align-items: end;
+    padding: 0;
+  }
+
+  .email-modal {
+    width: 100%;
+    padding: 26px 20px max(24px, env(safe-area-inset-bottom));
+    border-radius: 20px 20px 0 0;
+  }
+
+  .password-modal-backdrop {
+    align-items: end;
+    padding: 0;
+  }
+
+  .password-modal {
+    width: 100%;
+    max-height: calc(100vh - 20px);
+    padding: 26px 20px max(24px, env(safe-area-inset-bottom));
+    border-radius: 20px 20px 0 0;
+  }
+
+  .password-modal__header {
+    grid-template-columns: 1fr;
+  }
+
+  .password-modal__icon {
+    display: none;
+  }
+
+  .password-requirements ul {
+    grid-template-columns: 1fr;
+  }
+
+  .password-modal__actions {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+  }
+}

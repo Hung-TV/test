@@ -1,0 +1,423 @@
+.focus-session-overlay {
+  --focus-accent: var(--color-secondary);
+  --focus-primary: var(--color-primary);
+  --focus-card: var(--color-surface-container-lowest);
+  --focus-muted: var(--color-on-surface-variant);
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100dvh;
+  color: var(--color-on-surface);
+  font-family: var(--font-ui);
+  background: radial-gradient(circle at 100% 0%, rgba(252, 121, 189, 0.12), transparent 35%), var(--color-surface);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.focus-session-overlay[data-theme='dark'] {
+  background: radial-gradient(circle at 100% 0%, rgba(164, 48, 115, 0.22), transparent 38%), var(--color-surface);
+}
+
+.focus-session-header {
+  display: grid;
+  grid-template-columns: minmax(48px, 1fr) minmax(240px, 440px) minmax(48px, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: clamp(12px, 2.4vh, 24px) clamp(16px, 3vw, 40px);
+}
+
+.focus-btn-close {
+  justify-self: start;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-on-surface-variant);
+  background: transparent;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.focus-btn-close:hover {
+  color: var(--color-on-surface);
+  background: var(--color-surface-container);
+}
+
+.focus-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+  min-width: 0;
+}
+
+.focus-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.focus-progress-title {
+  color: var(--focus-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.focus-progress-count {
+  flex: none;
+  color: var(--focus-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.focus-progress-bar-bg {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-surface-container-highest);
+  overflow: hidden;
+}
+
+.focus-progress-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--focus-accent);
+  transition: width 300ms ease;
+}
+
+.focus-streak-badge {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: #3e2400;
+  background: var(--color-tertiary-fixed);
+  box-shadow: 0 5px 16px rgba(101, 62, 0, 0.12);
+  font-size: 0.82rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.focus-streak-icon { flex: none; }
+
+.focus-session-main {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(8px, 2vh, 20px) 20px;
+  perspective: 1200px;
+  overflow: hidden;
+}
+
+.focus-card-container {
+  width: min(400px, calc((100dvh - clamp(230px, 30vh, 280px)) * 0.8), calc(100vw - 40px));
+  min-width: 220px;
+  max-height: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 0;
+  border: 0;
+  border-radius: clamp(24px, 3vw, 40px);
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  perspective: 1500px;
+}
+
+.focus-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: 0 20px 52px rgba(17, 24, 39, 0.1);
+  transform-style: preserve-3d;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='dark'] .focus-card-inner { box-shadow: 0 20px 52px rgba(0, 0, 0, 0.32); }
+.focus-card-inner.is-flipped { transform: rotateY(180deg); }
+
+.focus-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 5vh, 40px);
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 46%, transparent);
+  border-radius: inherit;
+  background: var(--focus-card);
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.focus-card-back { transform: rotateY(180deg); }
+
+.focus-card-hint {
+  position: absolute;
+  top: clamp(26px, 6vh, 48px);
+  color: var(--color-secondary-container);
+  font-size: clamp(0.68rem, 1.5vh, 0.76rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.focus-card-kanji-huge,
+.focus-card-kanji-small,
+.focus-detail-value-ja { font-family: var(--font-japanese); }
+
+.focus-card-kanji-huge {
+  color: var(--focus-primary);
+  font-size: clamp(6rem, 18vh, 8.75rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.focus-card-badge-wrap {
+  position: absolute;
+  bottom: clamp(26px, 6vh, 48px);
+}
+
+.focus-card-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  color: var(--focus-muted);
+  background: var(--color-surface-container-low);
+  font-size: 0.86rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+}
+
+.focus-card-kanji-small {
+  margin-bottom: clamp(16px, 3vh, 28px);
+  color: var(--focus-primary);
+  font-size: clamp(3rem, 8vh, 4rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.focus-card-back-details {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2.5vh, 22px);
+  width: 100%;
+}
+
+.focus-detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.focus-detail-label {
+  color: var(--focus-muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.focus-detail-value,
+.focus-detail-value-ja {
+  max-width: 100%;
+  color: var(--color-on-surface);
+  font-size: clamp(1rem, 2.5vh, 1.3rem);
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.focus-detail-value-ja { color: var(--focus-primary); }
+
+.focus-session-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 28px);
+  padding: clamp(12px, 2vh, 24px) 24px clamp(18px, 4vh, 42px);
+}
+
+.focus-btn-review,
+.focus-btn-gotit {
+  min-width: 0;
+  width: min(240px, 42vw);
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease, background 150ms ease;
+}
+
+.focus-btn-review {
+  border: 1px solid var(--color-outline-variant);
+  color: var(--focus-primary);
+  background: var(--color-surface-container-lowest);
+}
+
+.focus-btn-review:hover { background: var(--color-surface-container-low); }
+
+.focus-btn-gotit {
+  border: 0;
+  color: var(--color-on-primary);
+  background: var(--focus-accent);
+  box-shadow: 0 10px 26px rgba(164, 48, 115, 0.24);
+}
+
+.focus-btn-review:hover,
+.focus-btn-gotit:hover { transform: translateY(-2px); }
+
+.focus-btn-review:active,
+.focus-btn-gotit:active { transform: translateY(0); }
+
+.focus-session-message {
+  width: min(520px, calc(100vw - 40px));
+  padding: clamp(28px, 5vw, 48px);
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 46%, transparent);
+  border-radius: 32px;
+  background: var(--focus-card);
+  box-shadow: 0 20px 52px rgba(17, 24, 39, 0.1);
+  text-align: center;
+}
+
+.focus-session-message h2 {
+  margin: 0 0 10px;
+  color: var(--focus-primary);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+}
+
+.focus-session-message p { color: var(--focus-muted); line-height: 1.6; }
+.focus-session-message > .focus-btn-gotit { margin-top: 26px; }
+
+.focus-complete-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  color: var(--color-on-primary);
+  background: var(--focus-accent);
+}
+
+.focus-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.focus-results div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--color-surface-container-low);
+}
+
+.focus-results strong { color: var(--focus-primary); font-size: 1.6rem; }
+.focus-results span { color: var(--focus-muted); font-size: 0.82rem; font-weight: 650; }
+
+.focus-complete-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.focus-complete-actions .focus-btn-review,
+.focus-complete-actions .focus-btn-gotit { flex: 1; width: auto; }
+
+@media (max-width: 720px) {
+  .focus-session-header {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: 10px;
+    padding-inline: 12px;
+  }
+
+  .focus-streak-badge {
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .focus-streak-badge span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .focus-progress-title { font-size: 0.67rem; }
+  .focus-progress-count { font-size: 0.7rem; }
+
+  .focus-card-container {
+    width: min(340px, calc((100dvh - clamp(205px, 27vh, 250px)) * 0.8), calc(100vw - 28px));
+    min-width: 190px;
+  }
+
+  .focus-session-footer { gap: 10px; padding-inline: 14px; }
+
+  .focus-btn-review,
+  .focus-btn-gotit {
+    flex: 1;
+    width: auto;
+    min-height: 52px;
+    padding-inline: 12px;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .focus-progress-top { gap: 8px; }
+  .focus-progress-title { max-width: 92px; }
+  .focus-session-footer svg { display: none; }
+  .focus-complete-actions { flex-direction: column; }
+}
+
+@media (max-height: 650px) {
+  .focus-session-header { padding-block: 8px; }
+  .focus-btn-close,
+  .focus-streak-badge { width: 38px; height: 38px; }
+  .focus-session-main { padding-block: 4px; }
+  .focus-session-footer { padding-block: 8px 12px; }
+  .focus-btn-review,
+  .focus-btn-gotit { min-height: 46px; }
+  .focus-card-container { width: min(310px, calc((100dvh - 170px) * 0.8), calc(100vw - 28px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focus-card-inner,
+  .focus-progress-bar-fill,
+  .focus-btn-review,
+  .focus-btn-gotit { transition: none; }
+}

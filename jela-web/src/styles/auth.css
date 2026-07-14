@@ -1,0 +1,693 @@
+/* ─── Login Page Layout ─── */
+.login-page {
+  display: flex;
+  width: 100%;
+  max-width: 100vw;
+  height: 100svh;
+  max-height: 100svh;
+  overflow: hidden;
+  font-family: var(--jela-font-sans);
+  color: var(--jela-on-surface);
+}
+
+/* ─── Left: Illustration Panel ─── */
+.login-illustration-panel {
+  flex: 1 1 50%;
+  min-width: 0;
+  max-width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--jela-illustration-bg);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  padding: clamp(1rem, 2vw, 2rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+
+.login-brand-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--jela-radius);
+  background-color: var(--jela-primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.login-brand-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-brand-icon-fallback {
+  font-family: var(--jela-font-jp);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--jela-on-primary);
+  line-height: 1;
+}
+
+.login-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.login-brand-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jela-primary);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.login-brand-tagline {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--jela-primary-container);
+  text-transform: uppercase;
+}
+
+.login-illustration {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.login-illustration img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ─── Right: Form Panel ─── */
+.login-form-panel {
+  flex: 1 1 50%;
+  min-width: 0;
+  max-width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--jela-surface);
+  padding: clamp(1rem, 2vw, 2rem);
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* ─── Top actions container (Đổi ngôn ngữ + Về trang chủ) ─── */
+.auth-top-actions {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ─── Language Switcher Button ─── */
+.auth-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--jela-outline-variant);
+  background: var(--jela-surface-container-lowest);
+  color: var(--jela-on-surface-variant);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.auth-lang-btn:hover {
+  border-color: var(--jela-outline);
+  background: var(--jela-surface-container-low);
+  color: var(--jela-on-surface);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* ─── Back-to-home button ─── */
+.auth-back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px 7px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--jela-outline-variant);
+  background: var(--jela-surface-container-lowest);
+  color: var(--jela-on-surface-variant);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.auth-back-home:hover {
+  border-color: var(--jela-outline);
+  background: var(--jela-surface-container-low);
+  color: var(--jela-on-surface);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.auth-back-home svg {
+  flex-shrink: 0;
+}
+
+
+.login-form-container {
+  width: 100%;
+  max-width: min(400px, 100%);
+  z-index: 2;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: clamp(1rem, 2vh, 2rem) 0;
+}
+
+@keyframes authFormEnter {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.auth-form-enter {
+  animation: authFormEnter 0.28s ease-out;
+}
+
+.login-form-header {
+  margin-bottom: clamp(16px, 3vh, 32px);
+}
+
+.login-form-header h1 {
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--jela-on-surface);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.login-form-header p {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--jela-on-surface-variant);
+  margin: 0;
+}
+
+/* ─── Form Fields ─── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vh, 20px);
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--jela-on-surface);
+}
+
+.login-forgot-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--jela-secondary-container);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.login-forgot-link:hover {
+  color: var(--jela-secondary);
+}
+
+.login-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--jela-outline);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  font-size: 15px;
+  font-family: var(--jela-font-sans);
+  color: var(--jela-on-surface);
+  background: var(--jela-surface-container-lowest);
+  border: 1px solid var(--jela-outline-variant);
+  border-radius: var(--jela-radius);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.login-input::placeholder {
+  color: var(--jela-outline);
+}
+
+.login-input:focus {
+  border-color: var(--jela-surface-tint);
+  box-shadow: 0 0 0 3px rgba(64, 89, 170, 0.12);
+}
+
+.login-input--toggle {
+  padding-right: 44px;
+}
+
+.login-input-toggle {
+  position: absolute;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--jela-outline);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.login-input-toggle:hover {
+  color: var(--jela-on-surface);
+}
+
+/* ─── JLPT Level Pills ─── */
+.auth-level-group {
+  display: flex;
+  gap: 8px;
+}
+
+.auth-level-btn {
+  flex: 1;
+  padding: 10px 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--jela-font-sans);
+  color: var(--jela-on-surface-variant);
+  background: var(--jela-surface-container-lowest);
+  border: 1px solid var(--jela-outline-variant);
+  border-radius: var(--jela-radius);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.auth-level-btn:hover {
+  border-color: var(--jela-outline);
+}
+
+.auth-level-btn--active {
+  background: var(--jela-primary);
+  border-color: var(--jela-primary);
+  color: var(--jela-on-primary);
+}
+
+.auth-level-btn--active:hover {
+  background: var(--jela-primary-container);
+  border-color: var(--jela-primary-container);
+}
+
+/* ─── Legal Text ─── */
+.auth-legal {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--jela-outline-variant);
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--jela-outline);
+  letter-spacing: 0.02em;
+}
+
+.auth-legal a {
+  color: var(--jela-outline);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.auth-legal a:hover {
+  color: var(--jela-on-surface-variant);
+}
+
+/* ─── Buttons ─── */
+.login-btn-primary {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--jela-font-sans);
+  color: var(--jela-on-primary);
+  background-color: var(--jela-secondary-container);
+  border: none;
+  border-radius: var(--jela-radius);
+  border-bottom: 4px solid var(--jela-on-secondary-container);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  margin-top: 4px;
+}
+
+.login-btn-primary:hover {
+  background-color: var(--jela-secondary-fixed-dim);
+}
+
+.login-btn-primary:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 4px 0;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--jela-outline-variant);
+}
+
+.login-divider span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--jela-outline);
+}
+
+.login-btn-google {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--jela-font-sans);
+  color: var(--jela-on-surface);
+  background: var(--jela-surface-container-lowest);
+  border: 1px solid var(--jela-outline-variant);
+  border-radius: var(--jela-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.login-btn-google:hover {
+  background-color: var(--jela-surface-container-low);
+  border-color: var(--jela-outline);
+}
+
+.login-btn-google img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* ─── Footer ─── */
+.login-footer {
+  text-align: center;
+  margin-top: clamp(16px, 2.5vh, 28px);
+  font-size: 14px;
+  color: var(--jela-on-surface-variant);
+}
+
+.login-footer a {
+  font-weight: 600;
+  color: var(--jela-surface-tint);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.login-footer a:hover {
+  color: var(--jela-primary);
+}
+
+/* ─── Watermark ─── */
+.login-watermark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-family: var(--jela-font-jp);
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 500;
+  color: var(--jela-on-surface);
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 1;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ─── Remember Login Checkbox ─── */
+.login-remember {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.login-remember input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--jela-outline-variant);
+  border-radius: 4px;
+  background-color: var(--jela-surface-container-lowest);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 3px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.login-remember input[type="checkbox"]:hover:not(:disabled) {
+  border-color: var(--jela-outline);
+  background-color: var(--jela-surface-container-low);
+}
+
+.login-remember input[type="checkbox"]:checked {
+  background-color: var(--jela-surface-tint);
+  border-color: var(--jela-surface-tint);
+}
+
+.login-remember input[type="checkbox"]:checked::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 9px;
+  border: solid var(--jela-on-primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+.login-remember input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--jela-surface-tint);
+  outline-offset: 2px;
+}
+
+.login-remember input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--jela-surface-container-low);
+}
+
+.login-remember span {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--jela-on-surface);
+  line-height: 1.4;
+}
+
+.login-remember small {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--jela-outline);
+  margin-top: 1px;
+  line-height: 1.3;
+}
+
+/* ─── Field Helper Text ─── */
+.field-helper {
+  font-size: 12px;
+  color: var(--jela-outline);
+  margin-top: 4px;
+  line-height: 1.4;
+  display: block;
+}
+
+/* ─── Password Checklist ─── */
+.password-checklist {
+  margin-top: 8px;
+  background-color: var(--jela-surface-container-low);
+  padding: 10px 14px;
+  border-radius: var(--jela-radius);
+  border: 1px solid var(--jela-outline-variant);
+}
+
+.password-checklist-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--jela-outline);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.password-checklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.password-checklist li {
+  font-size: 12px;
+  color: var(--jela-outline);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  line-height: 1.2;
+}
+
+.password-checklist li .bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  font-size: 9px;
+  border: 1.5px solid var(--jela-outline-variant);
+  color: transparent;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Unmet state */
+.password-checklist li.unmet {
+  color: #ef4444;
+}
+
+.password-checklist li.unmet .bullet {
+  border-color: #ef4444;
+  color: #ef4444;
+  background-color: transparent;
+}
+
+/* Met state */
+.password-checklist li.met {
+  color: #10b981;
+}
+
+.password-checklist li.met .bullet {
+  border-color: #10b981;
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .password-checklist ul {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* ─── Short viewport fallback (Đã tích hợp vào css mặc định của panel) ─── */
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .login-illustration-panel {
+    display: none;
+  }
+
+  .login-form-panel {
+    flex: 1 1 100%;
+    max-width: 100%;
+    height: 100svh;
+    padding: 1.5rem;
+  }
+
+  .auth-top-actions {
+    top: 16px;
+    right: 16px;
+  }
+}
+

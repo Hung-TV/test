@@ -1,0 +1,10 @@
+{
+  "appName" : "JELA",
+  "allowRegistration" : false,
+  "allowGoogleLogin" : false,
+  "defaultUserLevel" : "N5",
+  "defaultQuizQuestionCount" : 10,
+  "quizPassScore" : 40,
+  "maintenanceMode" : false,
+  "maintenanceMessage" : "Hệ thống đang bảo trì. Vui lòng quay lại sau."
+}

@@ -1,0 +1,98 @@
+:root {
+  /* Design tokens được chuyển trực tiếp từ DESIGN.md để toàn bộ giao diện dùng
+     chung một nguồn màu, font, kích thước sidebar và chiều rộng nội dung. */
+  --color-surface: #faf8ff;
+  --color-surface-container-low: #f4f3fa;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container: #eeedf4;
+  --color-surface-container-high: #e9e7ef;
+  --color-surface-container-highest: #e3e1e9;
+  --color-on-surface: #1a1b21;
+  --color-on-surface-variant: #444651;
+  --color-outline-variant: #c5c5d3;
+  --color-primary: #00236f;
+  --color-primary-container: #1e3a8a;
+  --color-on-primary: #ffffff;
+  --color-secondary: #a43073;
+  --color-secondary-container: #fc79bd;
+  --color-secondary-fixed: #ffd8e7;
+  --color-secondary-fixed-dim: #ffafd3;
+  --color-tertiary: #3e2400;
+  --color-tertiary-fixed: #ffddb8;
+  --color-tertiary-fixed-dim: #ffb95f;
+  --color-on-tertiary-fixed-variant: #653e00;
+  --sidebar-width: 280px;
+  --content-max-width: 1200px;
+  --font-ui: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-japanese: 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif;
+
+  font-family: var(--font-ui);
+  color: var(--color-on-surface);
+  background: var(--color-surface);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme='dark'] {
+  --color-surface: #16171d;
+  --color-surface-container-low: #1f2028;
+  --color-surface-container-lowest: #1b1c22;
+  --color-surface-container: #25262d;
+  --color-surface-container-high: #2b2c33;
+  --color-surface-container-highest: #34353d;
+  --color-on-surface: #f1f0f7;
+  --color-on-surface-variant: #c5c5d3;
+  --color-outline-variant: #444651;
+  --color-primary: #b6c4ff;
+  --color-primary-container: #264191;
+  --color-on-primary: #00164e;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--color-surface);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(164, 48, 115, 0.28);
+  outline-offset: 3px;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+p {
+  margin: 0;
+}
+.route-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: var(--color-on-surface, #1f2937);
+  background: var(--color-surface, #ffffff);
+  font-weight: 600;
+}

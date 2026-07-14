@@ -1,0 +1,35 @@
+/* JELA Komorebi Design Tokens */
+:root {
+  /* Surfaces */
+  --jela-surface: #faf8ff;
+  --jela-surface-container-low: #f4f3fa;
+  --jela-surface-container: #eeedf4;
+  --jela-surface-container-lowest: #ffffff;
+  --jela-illustration-bg: #f9f7f2;
+
+  /* Text */
+  --jela-on-surface: #1a1b21;
+  --jela-on-surface-variant: #444651;
+  --jela-outline: #757682;
+  --jela-outline-variant: #c5c5d3;
+
+  /* Brand */
+  --jela-primary: #00236f;
+  --jela-primary-container: #1e3a8a;
+  --jela-on-primary: #ffffff;
+  --jela-surface-tint: #4059aa;
+  --jela-secondary: #a43073;
+  --jela-secondary-container: #fc79bd;
+  --jela-on-secondary-container: #76014e;
+  --jela-secondary-fixed-dim: #ffafd3;
+
+  /* Typography */
+  --jela-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --jela-font-jp: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+
+  /* Spacing & Shape */
+  --jela-radius: 0.5rem;
+  --jela-radius-lg: 1rem;
+  --jela-radius-xl: 1.5rem;
+  --jela-spacing-base: 8px;
+}
