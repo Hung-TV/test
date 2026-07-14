@@ -75,7 +75,7 @@ export const dictionaryApi = {
   },
 
   async explainReviewStream(correctWord, selectedWord, questionType, onChunk) {
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://test-6z9h.onrender.com/api';
     const token = localStorage.getItem('accessToken')?.trim();
     const res = await fetch(`${API_BASE_URL}/me/dictionary-lists/review/explain`, {
       method: 'POST',
